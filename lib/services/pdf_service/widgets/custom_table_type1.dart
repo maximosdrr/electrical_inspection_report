@@ -1,5 +1,6 @@
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
+import 'package:report_generator/services/pdf_service/utils/get_custom_table_header_text_style.dart';
 import 'package:report_generator/services/pdf_service/utils/get_default_colors.dart';
 
 class CustomTableType1 {
@@ -18,13 +19,10 @@ class CustomTableType1 {
                 width: 1,
               ),
             ),
-            child: pw.Text("$title",
-                style: pw.TextStyle(
-                  fontSize: 19,
-                  fontWeight: pw.FontWeight.bold,
-                  color: PdfColor.fromHex(documentHexMainWhite()),
-                ),
-                textAlign: pw.TextAlign.center),
+            child: pw.Text(
+              "$title",
+              style: getCustomTableHeaderTextStyle(),
+            ),
           ),
         ),
         pw.Container(

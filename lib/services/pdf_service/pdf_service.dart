@@ -10,6 +10,7 @@ import 'package:report_generator/services/pdf_service/pages/company_identificati
 import 'package:report_generator/services/pdf_service/pages/intro.dart';
 import 'package:report_generator/services/pdf_service/pages/introduction_objective_methodology.dart';
 import 'package:report_generator/services/pdf_service/pages/legal_warning.dart';
+import 'package:report_generator/services/pdf_service/pages/nonconformity.dart';
 import 'package:report_generator/services/pdf_service/pages/traceability.dart';
 import 'package:report_generator/services/pdf_service/utils/get_download_path.dart';
 import 'package:report_generator/services/pdf_service/utils/get_permission.dart';
@@ -28,6 +29,7 @@ class PdfService implements IPdfService {
     TraceabilityPage treaceabilityPage = TraceabilityPage();
     IntroductionObjectiveMethodologyPage introductionObjectiveMethodologyPage =
         IntroductionObjectiveMethodologyPage();
+    NonConformityPage nonConformityPage = NonConformityPage();
 
     //Geração de paginas e adição na lista de retorno
     try {
@@ -49,6 +51,9 @@ class PdfService implements IPdfService {
       var generatedIntroductionObjectivesMethodologyPage =
           introductionObjectiveMethodologyPage.build(pagesContent[4]);
       pages.add(generatedIntroductionObjectivesMethodologyPage);
+      //Pagina de não conformidades
+      var generatedNonCoformityPage = nonConformityPage.build(pagesContent[5]);
+      pages.add(generatedNonCoformityPage);
       return pages;
     } catch (e) {
       print(e);
@@ -67,6 +72,7 @@ class PdfService implements IPdfService {
       var generatedPages = await generatePages(pagesContent);
       pdf.addPage(
         pw.MultiPage(
+          maxPages: 2000,
           pageFormat: PdfPageFormat.a3,
           header: (context) => PdfHeader.build(
               headerData, context.pageNumber, context.pagesCount),

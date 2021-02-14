@@ -1,28 +1,37 @@
 import 'dart:convert';
+import 'dart:io';
 
 class Nonconformity {
-  String index;
+  int index;
   String requirement;
   String cases;
   String correction;
+  String nonConformity;
+  File image;
   Nonconformity({
     this.index,
     this.requirement,
     this.cases,
     this.correction,
+    this.nonConformity,
+    this.image,
   });
 
   Nonconformity copyWith({
-    String index,
+    int index,
     String requirement,
     String cases,
     String correction,
+    String nonConformity,
+    File image,
   }) {
     return Nonconformity(
       index: index ?? this.index,
       requirement: requirement ?? this.requirement,
       cases: cases ?? this.cases,
       correction: correction ?? this.correction,
+      nonConformity: nonConformity ?? this.nonConformity,
+      image: image ?? this.image,
     );
   }
 
@@ -32,6 +41,8 @@ class Nonconformity {
       'requirement': requirement,
       'cases': cases,
       'correction': correction,
+      'nonConformity': nonConformity,
+      // 'image': image?.toMap(),
     };
   }
 
@@ -43,6 +54,8 @@ class Nonconformity {
       requirement: map['requirement'],
       cases: map['cases'],
       correction: map['correction'],
+      nonConformity: map['nonConformity'],
+      // image: File.fromMap(map['image']),
     );
   }
 
@@ -53,7 +66,7 @@ class Nonconformity {
 
   @override
   String toString() {
-    return 'Nonconformity(index: $index, requirement: $requirement, cases: $cases, correction: $correction)';
+    return 'Nonconformity(index: $index, requirement: $requirement, cases: $cases, correction: $correction, nonConformity: $nonConformity, image: $image)';
   }
 
   @override
@@ -64,7 +77,9 @@ class Nonconformity {
         o.index == index &&
         o.requirement == requirement &&
         o.cases == cases &&
-        o.correction == correction;
+        o.correction == correction &&
+        o.nonConformity == nonConformity &&
+        o.image == image;
   }
 
   @override
@@ -72,6 +87,8 @@ class Nonconformity {
     return index.hashCode ^
         requirement.hashCode ^
         cases.hashCode ^
-        correction.hashCode;
+        correction.hashCode ^
+        nonConformity.hashCode ^
+        image.hashCode;
   }
 }

@@ -6,18 +6,22 @@ import 'package:report_generator/models/nonconformity.dart';
 
 class Room {
   String title;
+  int index;
   List<Nonconformity> nonConformitys;
   Room({
     this.title,
+    this.index,
     this.nonConformitys,
   });
 
   Room copyWith({
     String title,
+    int index,
     List<Nonconformity> nonConformitys,
   }) {
     return Room(
       title: title ?? this.title,
+      index: index ?? this.index,
       nonConformitys: nonConformitys ?? this.nonConformitys,
     );
   }
@@ -25,6 +29,7 @@ class Room {
   Map<String, dynamic> toMap() {
     return {
       'title': title,
+      'index': index,
       'nonConformitys': nonConformitys?.map((x) => x?.toMap())?.toList(),
     };
   }
@@ -34,6 +39,7 @@ class Room {
 
     return Room(
       title: map['title'],
+      index: map['index'],
       nonConformitys: List<Nonconformity>.from(
           map['nonConformitys']?.map((x) => Nonconformity.fromMap(x))),
     );
@@ -44,7 +50,8 @@ class Room {
   factory Room.fromJson(String source) => Room.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Room(title: $title, nonConformitys: $nonConformitys)';
+  String toString() =>
+      'Room(title: $title, index: $index, nonConformitys: $nonConformitys)';
 
   @override
   bool operator ==(Object o) {
@@ -52,9 +59,10 @@ class Room {
 
     return o is Room &&
         o.title == title &&
+        o.index == index &&
         listEquals(o.nonConformitys, nonConformitys);
   }
 
   @override
-  int get hashCode => title.hashCode ^ nonConformitys.hashCode;
+  int get hashCode => title.hashCode ^ index.hashCode ^ nonConformitys.hashCode;
 }
