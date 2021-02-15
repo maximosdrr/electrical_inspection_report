@@ -8,7 +8,7 @@ Future<NonConformityPageData> getNonconformityMoky() async {
   var mokyImage = await getImageFileFromAssets('moky_image_1mb.jpg');
   List<Nonconformity> nonconformitys = [];
 
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < 3; i++) {
     nonconformitys.add(
       Nonconformity(
         requirement: 'Item 10.4.1 da NR10 e item 8.3.2.2 da ABNT NBR5410.',

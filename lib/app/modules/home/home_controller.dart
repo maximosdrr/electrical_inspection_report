@@ -7,6 +7,7 @@ import 'package:report_generator/moky/intro_page_moky.dart';
 import 'package:report_generator/moky/introduction_objective_methodology_moky.dart';
 import 'package:report_generator/moky/legal_warning_page_moky.dart';
 import 'package:report_generator/moky/non_conformity_moky.dart';
+import 'package:report_generator/moky/non_conformity_priority.dart';
 import 'package:report_generator/moky/traceability_moky.dart';
 import 'package:report_generator/services/pdf_service/pdf_service.dart';
 
@@ -30,6 +31,7 @@ abstract class _HomeControllerBase with Store {
     var introductionObjectiveMethodologyMoky =
         getIntroductionObjectivesMethodologyMoky();
     var nonconformityMoky = await getNonconformityMoky();
+    var nonconformityPriorityMoky = await getNonconformityPriorityMoky();
 
     var pagesData = [
       introPageMoky,
@@ -38,6 +40,7 @@ abstract class _HomeControllerBase with Store {
       traceabilityMoky,
       introductionObjectiveMethodologyMoky,
       nonconformityMoky,
+      nonconformityPriorityMoky,
     ];
 
     var generatedDocument =

@@ -4,6 +4,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
 import 'package:report_generator/models/footer_data.dart';
 import 'package:report_generator/models/header_data.dart';
+import 'package:report_generator/models/nonconformity_priority_page.dart';
 import 'package:report_generator/models/traceability_page_data.dart';
 import 'package:report_generator/services/pdf_service/abstract/i_pdf_service.dart';
 import 'package:report_generator/services/pdf_service/pages/company_identification.dart';
@@ -11,9 +12,11 @@ import 'package:report_generator/services/pdf_service/pages/intro.dart';
 import 'package:report_generator/services/pdf_service/pages/introduction_objective_methodology.dart';
 import 'package:report_generator/services/pdf_service/pages/legal_warning.dart';
 import 'package:report_generator/services/pdf_service/pages/nonconformity.dart';
+import 'package:report_generator/services/pdf_service/pages/priority_nonconformity.dart';
 import 'package:report_generator/services/pdf_service/pages/traceability.dart';
 import 'package:report_generator/services/pdf_service/utils/get_download_path.dart';
 import 'package:report_generator/services/pdf_service/utils/get_permission.dart';
+import 'package:report_generator/services/pdf_service/widgets/page_index_item.dart';
 import 'package:report_generator/services/pdf_service/widgets/pdf_footer.dart';
 import 'package:report_generator/services/pdf_service/widgets/pdf_header.dart';
 
@@ -30,6 +33,8 @@ class PdfService implements IPdfService {
     IntroductionObjectiveMethodologyPage introductionObjectiveMethodologyPage =
         IntroductionObjectiveMethodologyPage();
     NonConformityPage nonConformityPage = NonConformityPage();
+    PriorityNonConformityPage nonConformityPriorityPage =
+        PriorityNonConformityPage();
 
     //Geração de paginas e adição na lista de retorno
     try {
@@ -54,6 +59,14 @@ class PdfService implements IPdfService {
       //Pagina de não conformidades
       var generatedNonCoformityPage = nonConformityPage.build(pagesContent[5]);
       pages.add(generatedNonCoformityPage);
+
+      pages.add(
+        PageIndexItem.build("7. NÃO CONFORMIDADES - ATENDIMENTO PRIORITARIO"),
+      );
+
+      var generatedNonConformityPriorityPage =
+          nonConformityPriorityPage.build(pagesContent[6]);
+      pages.add(generatedNonConformityPriorityPage);
       return pages;
     } catch (e) {
       print(e);
